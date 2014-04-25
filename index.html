@@ -1,0 +1,144 @@
+<!--
+Name: Liz Baker, Breanna McGovern
+Date: 4/8/2014
+File: index.html
+Description: The main index for our music player
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>A Music Player</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <script src="js/jquery-2.0.3.min.js"></script>
+        <script src="js/jquery-1.7.2.min.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+    <body>
+       <div id="banner">
+            <h1>BreLiz Playlist</h1>
+
+            <div><!--navDiv-->
+			<ul class="nav">
+				<li id="genreBtn">Genre</li>
+                    <li class="menu">
+                        <p>Rock</p>
+                    </li><!--options-->
+
+				<li id="albumsBtn">Albums</li>
+                    <li class="menu">
+                    <p>Albums and songs in Music Player</p>
+                    </li><!--options-->
+
+                    <li id="artistBtn">Artist</li>
+                    <li class="menu">
+                    <p>An option goes here.</p> 
+                    </li><!--options-->
+			</ul>
+        </div><!--end navDiv-->
+        </div><!-- end banner and nav elements -->
+        
+        <!-- content goes here.. -->
+        <div id="container">
+        <div id="content">
+
+            <!--This will display either Genre Type, Album Name, or Artist Name-->
+            <div id="contentSubOne">
+                <!--Content will change using ajax-->
+                <ul id="">
+                    <li>Rock</li>
+                    <li>Alternative</li>
+                    <li>Dance</li>
+                    <li>Electronic</li>
+                </ul>
+            </div><!--end contentSubOne-->
+
+            <div id="contentSubTwo">
+                <!--Content will change using ajax-->
+                <ul id="">
+                    <li>RockSong1</li>
+                    <li>RockSong2</li>
+                </ul>
+            </div><!--end contentSubTwo-->
+
+
+        <div id="musicPlayer">
+            <img src="daybreak/_screenshot.png" />
+        </div><!--end musicPlayer-->
+
+        <!--clear floats and whatever-->
+        <div style="clear:both; width:100%" ></div>
+
+        <!--Search--> 
+        <div id="search">
+            <input id="searchTxt" type="text" />
+            <input id="btnSearch" type="button" value="Find It!"/>
+
+        </div>
+    </div><!-- end #content -->
+    </div><!-- end #container -->
+        
+        <script>
+            //wait for the document to be ready to go
+            $(document).ready(function() {
+                //this is for the nav
+                $("#genreBtn").click(function()		{
+                    $.get(
+		            "fragments/about.html",
+		             function(data)		{
+                    $("#content").html(data);
+                    window.location.hash = "genre";
+		      })
+		})
+                //this is for the nav
+		        $("#homeBtn").click(function()		{
+                    $.get(
+			        "fragments/index.html",
+			        function(data)		{
+                    $("#content").html(data);
+                    window.location.hash = "home";
+                })
+		})
+        //this is for the nav                
+		      $("#slideBtn").click(function()		{
+                    $.get(
+                	"fragments/slide.html",
+                	 function(data)		{
+                    $("#content").html(data);
+                    window.location.hash = "slide";
+                })
+        })
+
+            //this is for the nav, toggle class
+            $('.menu').hide();
+                $('.nav li').toggle(function() {
+                    $(this).next('.menu').fadeIn();
+                    //$(this).addClass('close');
+                },
+                    //this is for the nav
+                    function() {
+                        $(this).next('.nav li').fadeOut();
+                        //$(this).removeClass('close');
+                    }); // end toggle
+                    
+                    var namesDiv = $("#names");
+                    console.log("toggle");
+                    
+
+          // JSON Data
+          $.getJSON('data.json', function(data)   {
+                console.log("data");
+                
+                var tracks = data.albums[0].tracks;
+                for(var i = 0; i < tracks.length; i++)  {
+                    namesDiv.append("<li>"
+                                    + tracks[i]
+                                    + "</li>"
+                                    );
+                }
+                });
+            });
+        </script>
+    </body>
+</html>
