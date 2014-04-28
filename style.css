@@ -31,7 +31,7 @@ h1	{
     padding-left: 2%;
     margin-left: -60px;
     margin-top: -20px;
-    margin-bottom: none;
+    margin-bottom: 2%;
     background: #610078;
     /*text-align: center;*/
 
@@ -69,10 +69,11 @@ h2.close {
 }
 #container {
     margin:0 auto;
+    background-color: yellow;
 }
 #content {
-    /*width: 100%;
-    height: 100%;*/
+    width: 50%;
+    /*height: 100%;*/
     margin-top:none;
     background-color:white;
     padding: 5%;
@@ -84,18 +85,30 @@ h2.close {
 }
 #contentSubOne {
     float:left;
-    width: 200px;
+    width: 440px;
     background-color: pink;
+    padding: 10px;
     
 }
+/*
 #contentSubTwo {
     width: 200px;
     float: left;
     background-color: purple;
 }
+*/
 
+#genres {
+    float: left;
+    width: 200px;
+    background-color: red;
+}
 
-
+#browse {
+    float: left;
+    width: 200px;
+    background-color: blue;
+}
 
 
 

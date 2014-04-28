@@ -1,16 +1,77 @@
 <html>
-	<head>
-		<title>
-			Music Player
-		</title>
-                <link rel="stylesheet" type="text/css" href="../style.css" />       
-		<script src="../js/jquery-2.0.3.min.js"></script>
-                <script src="../js/jquery-1.7.2.min.js"></script>
-		<script src="../js/main.js"></script>  
-	</head>
-	<body>
-                        <div id="mainPicture">
-                            <img src="" />
-                        </div><!-- end of #picture-->
-</body>
+    <head>
+        <title>A Music Player</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+        <link rel="stylesheet" type="text/css" href="../style.css" />
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <script src="../js/jquery-2.0.3.min.js"></script>   
+        <script src="../js/main.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/handlebars-v1.3.0.js"></script>
+        <script type="text/javascript" src="../js/underscore-min.js"></script>    
+    </head>
+    <body>
+        <div id="mainPicture">
+            
+            
+        <script id="homePage" type="text/x-handlebars-template">
+            Its {{name}}! Just listening to music and stuff.
+        </script>   
+        <!-- home jpage list of albums template -->
+        <script id="albumHomeLinks" type="text/x-handlebars-template">
+            <ul class="album_list">
+            {{#each albums}}
+            <li class="albumLink" data-id="{{this.id}}">
+            {{this.artist}}
+            {{this.title}}
+            {{this.date}}
+            {{this.image}}
+            </li>
+            {{/each}}	
+            </ul>
+        </script>        
+
+        <!-- home jpage list of albums template -->
+        <script id="albumLinks" type="text/x-handlebars-template">
+            <ul class="album_list">
+            {{#each albums}}
+            <li class="albumLink" data-id="{{this.id}}">
+            {{this.artist }} -
+            {{this.title}} -
+            {{this.date}} - 
+            {{this.image}}
+            </li>
+            {{/each}}	
+            </ul>
+        </script>          
+
+        <!-- genre links -->
+        <script id="genreLinks" type="text/x-handlebars-template">
+            <ul class="genre_links">
+            {{#each this}}
+            <li class="genreLink">{{this}}</li>
+            {{/each}}
+            </ul>
+        </script>
+
+        <!-- album info template -->
+        <script id="albumInfo" type="text/x-handlebars-template">
+            <div>
+            <div class="albumArtist">{{artist}}</div> 
+            <div class="albumTitle">{{title}}</div>
+            <div class="albumDate">{{date}}</div>
+            </div>
+        </script>      
+
+        <!-- album info template -->
+        <script id="artistLinks" type="text/x-handlebars-template">
+            <ul class="artist_links">
+            {{#each this}}
+            <li class="artistLink">{{this}}</li>
+            {{/each}}
+            </ul>
+        </script>        
+
+        </div><!-- end of #picture-->
+    </body>
 </html>

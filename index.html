@@ -18,31 +18,37 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-        <div id="banner">
-            <h1>BreLiz Playlist</h1>
 
-            <div id="nav"><!--navDiv-->
-                <ul class="nav">
-                    <li id="genreBtn" class="navBtn">Genre</li>
-                    <li class="subMenu">
-                        <p>Rock</p>
-                    </li><!--options-->
+        <div id="container">        
+            <div id="banner">
+                <h1>BreLiz Playlist</h1>
 
-                    <li id="albumsBtn" class="navBtn">Albums</li>
-                    <li class="subMenu">
-                        <p>Albums and songs in Music Player</p>
-                    </li><!--options-->
+                <div id="nav"><!--navDiv-->
+                    <ul class="nav">
+                        <li id="genreBtn" class="navBtn">Genre</li>
+                        <li class="subMenu">
+                            <p>Rock</p>
+                        </li><!--options-->
 
-                    <li id="artistBtn" class="navBtn">Artist</li>
-                    <li class="subMenu">
-                        <p>An option goes here.</p> 
-                    </li><!--options-->
-                </ul>
-            </div><!--end navDiv-->
-        </div><!-- end banner and nav elements -->
+                        <li id="albumsBtn" class="navBtn">Albums</li>
+                        <li class="subMenu">
+                            <p>Albums and songs in Music Player</p>
+                        </li><!--options-->
 
-        <!-- content goes here.. -->
-        <div id="container">
+                        <li id="artistsBtn" class="navBtn">Artist</li>
+                        <li class="subMenu">
+                            <p>An option goes here.</p> 
+                        </li><!--options-->
+                    </ul>
+                </div><!--end navDiv-->
+            </div><!-- end banner and nav elements -->
+
+            <div id="musicPlayer">
+                <img src="daybreak/_screenshot.png" />
+                <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
+            </div><!--end musicPlayer-->               
+
+            <!-- content goes here.. -->
             <div id="content">
 
                 <!--This will display either Genre Type, Album Name, or Artist Name-->
@@ -51,17 +57,13 @@ Description: The main index for our music player
                     <div id="genres"></div>
                     <div id="albums"></div>
                     <div id="artists"></div>
+                    <div id="browse"></div> <!-- this div will display to the right with more info -->
                 </div>
-                <div id="contentSubTwo">
-                    <div id="browse"></div>
-                </div>
+                <!-- <div id="contentSubTwo">
+                     <div id="browse"></div>
+                 </div>-->
 
                 <div id="info"></div>
-
-                <div id="musicPlayer">
-                    <img src="daybreak/_screenshot.png" />
-                    <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
-                </div><!--end musicPlayer-->
 
                 <!--clear floats and whatever-->
                 <div style="clear:both; width:100%" ></div>
@@ -73,7 +75,11 @@ Description: The main index for our music player
                     <div><input id="btnSearch" type="button" value="search" /></div>
                 </div>
             </div><!-- end #content -->
+
+
+
         </div><!-- end #container -->
+
         <script id="homePage" type="text/x-handlebars-template">
             Its {{name}}! Just listening to music and stuff.
         </script>   
@@ -81,54 +87,54 @@ Description: The main index for our music player
         <script id="albumHomeLinks" type="text/x-handlebars-template">
             <ul class="album_list">
             {{#each albums}}
-                <li class="albumLink" data-id="{{this.id}}">
-                    {{this.artist}}
-                    {{this.title}}
-                    {{this.date}}
-                    {{this.image}}
-                 </li>
+            <li class="albumLink" data-id="{{this.id}}">
+            {{this.artist}}
+            {{this.title}}
+            {{this.date}}
+            {{this.image}}
+            </li>
             {{/each}}	
             </ul>
         </script>        
-        
+
         <!-- home jpage list of albums template -->
         <script id="albumLinks" type="text/x-handlebars-template">
             <ul class="album_list">
             {{#each albums}}
-                <li class="albumLink" data-id="{{this.id}}">
-                    {{this.artist }} -
-                    {{this.title}} -
-                    {{this.date}} - 
-                    {{this.image}}
-                 </li>
+            <li class="albumLink" data-id="{{this.id}}">
+            {{this.artist }} -
+            {{this.title}} -
+            {{this.date}} - 
+            {{this.image}}
+            </li>
             {{/each}}	
             </ul>
         </script>          
-        
+
         <!-- genre links -->
         <script id="genreLinks" type="text/x-handlebars-template">
             <ul class="genre_links">
-                {{#each this}}
-                    <li class="genreLink">{{this}}</li>
-                {{/each}}
+            {{#each this}}
+            <li class="genreLink">{{this}}</li>
+            {{/each}}
             </ul>
         </script>
 
         <!-- album info template -->
         <script id="albumInfo" type="text/x-handlebars-template">
             <div>
-                <div class="albumArtist">{{artist}}</div> 
-                <div class="albumTitle">{{title}}</div>
-                <div class="albumDate">{{date}}</div>
+            <div class="albumArtist">{{artist}}</div> 
+            <div class="albumTitle">{{title}}</div>
+            <div class="albumDate">{{date}}</div>
             </div>
         </script>      
 
         <!-- album info template -->
         <script id="artistLinks" type="text/x-handlebars-template">
             <ul class="artist_links">
-                {{#each this}}
-                    <li class="artistLink">{{this}}</li>
-                {{/each}}
+            {{#each this}}
+            <li class="artistLink">{{this}}</li>
+            {{/each}}
             </ul>
         </script>        
 
@@ -139,32 +145,49 @@ var tracks;
 
 $(document).ready(function() {
     //this is for the nav to go to different fragments pages..
-    //$("#genreBtn").click(function()		{
-    //            $.get(
-    //	            "fragments/about.html",
-    //	             function(data)		{
-    //            $("#content").html(data);
-    //            window.location.hash = "genre";
-    //	      })
-    //	})
+    $("#genreBtn").click(function() {
+        $.get(
+                "fragments/index.html",
+                function(data) {
+                    $("#content").html(data);
+                    window.location.hash = "genre";
+                })
+    })
     //this is for the nav
-    //	        $("#homeBtn").click(function()		{
-    //            $.get(
-    //		        "fragments/index.html",
-    //		        function(data)		{
-    //            $("#content").html(data);
-    //            window.location.hash = "home";
-    //        })
-    //	})
+    $("#albumsBtn").click(function() {
+        $.get(
+                "fragments/albums.html",
+                function(data) {
+                    $("#content").html(data);
+                    window.location.hash = "albums";
+                })
+    })
     //this is for the nav                
-    // $("#slideBtn").click(function()		{
-    //            $.get(
-    //        	"fragments/slide.html",
-    //        	 function(data)		{
-    //            $("#content").html(data);
-    //            window.location.hash = "slide";
-    //        })
-    // })
+    $("#artistsBtn").click(function() {
+        $.get(
+                "fragments/artists.html",
+                function(data) {
+                    $("#content").html(data);
+                    window.location.hash = "artists";
+                })
+    })
+
+    //get the window's hash value
+    var hashVal = "fragments/" + window.location.hash + ".html";
+    hashVal = hashVal.replace("#", "");
+    console.log(hashVal);
+
+    if (window.location.hash == "") {
+        hashVal = "fragments/index.html";
+    }
+
+    $.get(
+            hashVal,
+            function(data) {
+                console.log(data);
+                $("#content").html(data);
+
+            })
 
     //this is for the nav, toggle class
     //  $('.menu').hide();
@@ -216,7 +239,8 @@ $(document).ready(function() {
         $(this).toggleClass('close');
         if ($(this).togglClass('close')) {
             $('#browse').fadeOut();//closing the songs once the genres fadeout  
-        };
+        }
+        ;
     });//end toggle?
 
     //click on AlbumsBtn and the data display
@@ -256,7 +280,7 @@ $(document).ready(function() {
     var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
     //var artistLinkTemplate = Handlebars.compile($("#artistLinks").html());
     //var artistInfoTemplate = Handlebars.compile($("#artistInfo").html());
-    
+
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
