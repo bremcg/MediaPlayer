@@ -127,7 +127,7 @@ $(document).ready(function() {
     var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
     var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
     var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
-    var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
+   // var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
     //below is compile for artistName array to display on artists page
     var artistsLinkTemplate = Handlebars.compile($("#artistsLinks").html());//this worked!!
 
@@ -159,15 +159,16 @@ $(document).ready(function() {
     })
 
 
-
-    $("#genres").on("click", ".genreLink", function() {
-        var genreToFind = $(this).html();
+    //this finds id of the album when you click on artist and displays in #browse
+    //IT WORKS!!!!
+    $("#artists").on("click", ".artistsLink", function() {
+        var artistToFind = $(this).html();
         var results = {};
 
-        results.albums = _.where(albums, {genre: genreToFind});
+        results.albums = _.where(albums, {artist: artistToFind});
 
         browseDiv.html(albumLinkTemplate(results));
-    })
+    }) 
 
     $("#btnSearch").click(function() {
         //get the search term

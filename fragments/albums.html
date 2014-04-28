@@ -127,7 +127,7 @@ $(document).ready(function() {
     var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
     var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
     var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
-    var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
+   // var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
     //below is compile for albumsTitle array to display on albums page
     var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
 
@@ -160,17 +160,20 @@ $(document).ready(function() {
 
         //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
     })
-
-
-
-    $("#genres").on("click", ".genreLink", function() {
-        var genreToFind = $(this).html();
+    
+    //this finds id when you click on albums and displays in #browse
+    //IT WORKS!!!!
+    $("#albums").on("click", ".albumsLink", function() {
+        var albumToFind = $(this).html();
         var results = {};
 
-        results.albums = _.where(albums, {genre: genreToFind});
+        results.albums = _.where(albums, {title: albumToFind});
 
         browseDiv.html(albumLinkTemplate(results));
-    })
+    })    
+    
+    
+    
 
     $("#btnSearch").click(function() {
         //get the search term
@@ -188,18 +191,6 @@ $(document).ready(function() {
                 return titleWord.toUpperCase() == searchTerm.toUpperCase();
             })
         })
-        /*for(var i = 0; i < books.length; i++) {
-         //split the book's name into individual words
-         var titleSplit = books[i].title.split(" ");
-         
-         //loop through those words
-         for(var y = 0; y < titleSplit.length; y++) {
-         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
-         results.books.push(books[i]);
-         break;
-         }
-         }
-         }*/
 
         browseDiv.html(albumLinkTemplate(results));
 
