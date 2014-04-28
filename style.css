@@ -103,6 +103,16 @@ h2.close {
     width: 200px;
     background-color: red;
 }
+#albums {
+    float: left;
+    width: 200px;
+    background-color: red;
+}
+#artists {
+    float: left;
+    width: 200px;
+    background-color: red;
+}
 
 #browse {
     float: left;

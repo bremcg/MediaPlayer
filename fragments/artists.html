@@ -11,7 +11,6 @@
         <script type="text/javascript" src="../js/underscore-min.js"></script>    
 	</head>
 	<body>
-        <div id="data">
             
 <!-- This page will display then artists for user to select -->            
                     <!--This will display either Genre Type, Album Name, or Artist Name-->
@@ -20,9 +19,6 @@
                         <div id="artists"></div>
                         <div id="browse"></div> <!-- this div will display to the right with more info -->
                     </div>
-                    <!-- <div id="contentSubTwo">
-                         <div id="browse"></div>
-                     </div>-->
 
                     <div id="info"></div>
 
@@ -35,24 +31,12 @@
                         <div>Title: <input id="txtSearch" /></div>
                         <div><input id="btnSearch" type="button" value="search" /></div>
                     </div>            
-        </div><!-- end of #picture-->
+
  
         <script id="homePage" type="text/x-handlebars-template">
             Its {{name}}! Just listening to music and stuff.
         </script>   
-        <!-- home jpage list of albums template -->
-        <script id="albumHomeLinks" type="text/x-handlebars-template">
-            <ul class="album_list">
-            {{#each albums}}
-            <li class="albumLink" data-id="{{this.id}}">
-            {{this.artist}}
-            {{this.title}}
-            {{this.date}}
-            {{this.image}}
-            </li>
-            {{/each}}	
-            </ul>
-        </script>        
+        
 
         <!-- home jpage list of albums template -->
         <script id="albumLinks" type="text/x-handlebars-template">
@@ -117,8 +101,6 @@ $(document).ready(function() {
     //cached DOM references
     var infoDiv = $("#info");
     var browseDiv = $("#browse");
-    var genreDiv = $("#genres");
-    var albumsDiv = $("#albums");
     var artistDiv = $("#artists");
 
 
@@ -126,8 +108,7 @@ $(document).ready(function() {
     var hompageTemplate = Handlebars.compile($("#homePage").html());
     var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
     var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
-    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
-   // var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
+   // var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
     //below is compile for artistName array to display on artists page
     var artistsLinkTemplate = Handlebars.compile($("#artistsLinks").html());//this worked!!
 
@@ -136,7 +117,7 @@ $(document).ready(function() {
         albums = data.albums;
         image = data.albums.image;
         $("#content").append(albumLinkTemplate(data));
-        genreDiv.html(genreLinkTemplate(data.genres));
+        //genreDiv.html(genreLinkTemplate(data.genres));
         artistDiv.html(artistsLinkTemplate(data.artistName));
     })
 
