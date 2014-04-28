@@ -85,11 +85,20 @@ h2.close {
 #contentSubOne {
     float:left;
     width: 200px;
+    background-color: pink;
+    
 }
 #contentSubTwo {
     width: 200px;
     float: left;
+    background-color: purple;
 }
+
+
+
+
+
+
 #musicPlayer {
     width: 400px;
     float: right;
