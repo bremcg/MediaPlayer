@@ -25,7 +25,7 @@ Description: The main index for our music player
 
                 <div id="nav"><!--navDiv-->
                     <ul class="nav">
-                        <li id="genreBtn" class="navBtn">Genre</li>
+                        <li id="genresBtn" class="navBtn">Genre</li>
                         <li class="subMenu">
                             <p>Rock</p>
                         </li><!--options-->
@@ -50,30 +50,31 @@ Description: The main index for our music player
 
             <!-- content goes here.. -->
             <div id="content">
+                <div id="data">
+                    <!--This will display either Genre Type, Album Name, or Artist Name-->
+                    <!-- start of an experiment to slide the option to the left-->
+                    <div id="contentSubOne">
+                        <div id="genres"></div>
+                        <div id="albums"></div>
+                        <div id="artists"></div>
+                        <div id="browse"></div> <!-- this div will display to the right with more info -->
+                    </div>
+                    <!-- <div id="contentSubTwo">
+                         <div id="browse"></div>
+                     </div>-->
 
-                <!--This will display either Genre Type, Album Name, or Artist Name-->
-                <!-- start of an experiment to slide the option to the left-->
-                <div id="contentSubOne">
-                    <div id="genres"></div>
-                    <div id="albums"></div>
-                    <div id="artists"></div>
-                    <div id="browse"></div> <!-- this div will display to the right with more info -->
-                </div>
-                <!-- <div id="contentSubTwo">
-                     <div id="browse"></div>
-                 </div>-->
+                    <div id="info"></div>
 
-                <div id="info"></div>
+                    <!--clear floats and whatever-->
+                    <div style="clear:both; width:100%" ></div>
 
-                <!--clear floats and whatever-->
-                <div style="clear:both; width:100%" ></div>
-
-                <!--Search--> 
-                <div id="search">
-                    <div>Search for</div>
-                    <div>Title: <input id="txtSearch" /></div>
-                    <div><input id="btnSearch" type="button" value="search" /></div>
-                </div>
+                    <!--Search--> 
+                    <div id="search">
+                        <div>Search for</div>
+                        <div>Title: <input id="txtSearch" /></div>
+                        <div><input id="btnSearch" type="button" value="search" /></div>
+                    </div>
+                </div><!-- end #data -->
             </div><!-- end #content -->
 
 
@@ -145,12 +146,12 @@ var tracks;
 
 $(document).ready(function() {
     //this is for the nav to go to different fragments pages..
-    $("#genreBtn").click(function() {
+    $("#genresBtn").click(function() {
         $.get(
                 "fragments/index.html",
                 function(data) {
                     $("#content").html(data);
-                    window.location.hash = "genre";
+                    window.location.hash = "genres";
                 })
     })
     //this is for the nav
@@ -178,6 +179,7 @@ $(document).ready(function() {
     console.log(hashVal);
 
     if (window.location.hash == "") {
+        // hashVal = "fragments/index.html";
         hashVal = "fragments/index.html";
     }
 
@@ -233,7 +235,7 @@ $(document).ready(function() {
     $('.subMenu').hide();//hides the nav sub Menus
 
     //click on navBtn and the data displays
-    $('#genreBtn').click(function() {
+    $('#genresBtn').click(function() {
         $('#genres').slideToggle(300);//menu slides down
         //  $('#genres').fadeIn('slow');//menu slides down
         $(this).toggleClass('close');

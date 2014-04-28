@@ -9,60 +9,205 @@
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/handlebars-v1.3.0.js"></script>
         <script type="text/javascript" src="../js/underscore-min.js"></script>    
-                 
-                <script>
-                    $(document).ready(function() {
-                        
-                        
-                var namesDiv = $(".main");
-                console.log("sdjf");
-                
-              $.getJSON('data.json', function(data)   {
-                    //what'd we get?
-                    //hmmmmm??
-                    console.log("data");
-                    
-                    var tracks = data.albums[0].tracks;
-                    for(var i = 0; i < tracks.length; i++)  {
-                        namesDiv.append("<li>"
-                                        + tracks[i]
-                                        + "</li>"
-                                        );
-                    }
-                
-                });                        
-                        
-                        $('.answer').hide();
-                        $('.main h2').toggle(function() {
-                                     $(this).next('.answer').fadeIn();
-                                     //     $(this).addClass('close');
-                                       },
-                                       function() {
-                                        $(this).next('.answer').fadeOut();
-                                      //    $(this).removeClass('close');
-                                 }); // end toggle
-                       }); // end ready
-                </script>
-        
 	</head>
 <body>
-    <div class="words">
-    <h1>Albums and songs in 'Music Player'</h1>
-    <h3>Click on the album and the songs will display below..</h3>
-    <div class="main">
-        <h2>I've heard that Music Player is funny.  Is that true?</h2>
-              <div class="answer">
-                <p>Why, yes it is! Studies have proven that we're hilarious and you should think so too.</p>
-              </div>
-         <h2>Why is Music Player so awesome?</h2>
-              <div class="answer">
-                <p>Because they just are.</p>
-              </div>
-         <h2>How can I play Music Player?</h2>
-              <div class="answer">
-                <p>Answer goes here!</p>
-              </div>	
-    </div><!--end .words-->
-    </div><!--end of #main-->
+        <div id="data">
+            
+<!-- This page will display then albums for user to select -->            
+                    <!--This will display either Genre Type, Album Name, or Artist Name-->
+                    <!-- start of an experiment to slide the option to the left-->
+                    <div id="contentSubOne">
+                        <div id="albums"></div>
+                        <div id="browse"></div> <!-- this div will display to the right with more info -->
+                    </div>
+                    <!-- <div id="contentSubTwo">
+                         <div id="browse"></div>
+                     </div>-->
+
+                    <div id="info"></div>
+
+                    <!--clear floats and whatever-->
+                    <div style="clear:both; width:100%" ></div>
+
+                    <!--Search--> 
+                    <div id="search">
+                        <div>Search for</div>
+                        <div>Title: <input id="txtSearch" /></div>
+                        <div><input id="btnSearch" type="button" value="search" /></div>
+                    </div>            
+        </div><!-- end of #picture-->
+ 
+        <script id="homePage" type="text/x-handlebars-template">
+            Its {{name}}! Just listening to music and stuff.
+        </script>   
+        <!-- home jpage list of albums template -->
+        <script id="albumHomeLinks" type="text/x-handlebars-template">
+            <ul class="album_list">
+            {{#each albums}}
+            <li class="albumLink" data-id="{{this.id}}">
+            {{this.artist}}
+            {{this.title}}
+            {{this.date}}
+            {{this.image}}
+            </li>
+            {{/each}}	
+            </ul>
+        </script>        
+
+        <!-- home jpage list of albums template -->
+        <script id="albumLinks" type="text/x-handlebars-template">
+            <ul class="album_list">
+            {{#each albums}}
+            <li class="albumLink" data-id="{{this.id}}">
+            {{this.artist }} -
+            {{this.title}} -
+            {{this.date}} - 
+            {{this.image}}
+            </li>
+            {{/each}}	
+            </ul>
+        </script>  
+        
+        <!-- albums links IT WORKED!! -->
+        <!-- this will create the links to display all albums from albumTitle array created in JSON -->
+        <script id="albumsLinks" type="text/x-handlebars-template">
+            <ul class="albums_links">
+            {{#each this}}
+            <li class="albumsLink">{{this}}</li>
+            {{/each}}
+            </ul>            
+        </script>
+        <!-- this script above should display a list of albums to click.. ->
+
+        <!-- genre links -->
+        <script id="genreLinks" type="text/x-handlebars-template">
+            <ul class="genre_links">
+            {{#each this}}
+            <li class="genreLink">{{this}}</li>
+            {{/each}}
+            </ul>
+        </script>
+
+        <!-- album info template -->
+        <script id="albumInfo" type="text/x-handlebars-template">
+            <div>
+            <div class="albumArtist">{{artist}}</div> 
+            <div class="albumTitle">{{title}}</div>
+            <div class="albumDate">{{date}}</div>
+            </div>
+        </script>      
+
+        <!-- album info template -->
+        <script id="artistLinks" type="text/x-handlebars-template">
+            <ul class="artist_links">
+            {{#each this}}
+            <li class="artistLink">{{this}}</li>
+            {{/each}}
+            </ul>
+        </script>          
+        
+        <script>
+var albums;
+var tracks;
+
+$(document).ready(function() {
+   
+//below starts getting information from JSON file                    
+
+    //cached DOM references
+    var infoDiv = $("#info");
+    var browseDiv = $("#browse");
+    var genreDiv = $("#genres");
+    var albumsDiv = $("#albums");
+    var artistDiv = $("#artists");
+
+
+    //templates
+    var hompageTemplate = Handlebars.compile($("#homePage").html());
+    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
+    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
+    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
+    var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
+    //below is compile for albumsTitle array to display on albums page
+    var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
+
+
+
+    $.getJSON('data/data.json', function(data) {
+        albums = data.albums;
+        image = data.albums.image;
+        $("#content").append(albumLinkTemplate(data));
+        genreDiv.html(genreLinkTemplate(data.genres));
+        albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
+        artistDiv.html(artistLinkTemplate(data.artist));
+        
+    })
+
+
+    //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
+    $("#albums").on("click", ".albumLink", function() {
+        var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
+        albumsinfoDiv.html(albumInfoTemplate(albumInfo));
+        console.log(albums[$(this).data('id')]);
+
+
+        //get the data
+        var templateData = albums[$(this).data('id')]
+        //generate html
+        var toAdd = albumInfoTemplate(templateData);
+        //show in infor div
+        infoDiv.html(toAdd);
+
+        //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
+    })
+
+
+
+    $("#genres").on("click", ".genreLink", function() {
+        var genreToFind = $(this).html();
+        var results = {};
+
+        results.albums = _.where(albums, {genre: genreToFind});
+
+        browseDiv.html(albumLinkTemplate(results));
+    })
+
+    $("#btnSearch").click(function() {
+        //get the search term
+        var searchTerm = $("#txtSearch").val();
+        //object to store any results
+        var results = {
+            albums: []
+        }
+
+        //loop through all of our albums
+        results.albums = _.filter(albums, function(item) {
+            //return (item.title.indexOf(searchTerm) != -1);
+            var titleSplit = item.title.split(" ");
+            return _.find(titleSplit, function(titleWord) {
+                return titleWord.toUpperCase() == searchTerm.toUpperCase();
+            })
+        })
+        /*for(var i = 0; i < books.length; i++) {
+         //split the book's name into individual words
+         var titleSplit = books[i].title.split(" ");
+         
+         //loop through those words
+         for(var y = 0; y < titleSplit.length; y++) {
+         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
+         results.books.push(books[i]);
+         break;
+         }
+         }
+         }*/
+
+        browseDiv.html(albumLinkTemplate(results));
+
+    })
+})
+        </script>          
+        
+        
+        
 </body>
 </html>
