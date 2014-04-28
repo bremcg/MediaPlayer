@@ -135,8 +135,8 @@ $(document).ready(function() {
                 function(data) {
                     $("#data").html(data);
                     window.location.hash = "genres";
-                })
-    })
+                });
+    });
     //this is for the nav
     $("#albumsBtn").click(function() {
         $.get(
@@ -144,8 +144,8 @@ $(document).ready(function() {
                 function(data) {
                     $("#data").html(data);
                     window.location.hash = "albums";
-                })
-    })
+                });
+    });
     //this is for the nav                
     $("#artistsBtn").click(function() {
         $.get(
@@ -153,8 +153,8 @@ $(document).ready(function() {
                 function(data) {
                     $("#data").html(data);
                     window.location.hash = "artists";
-                })
-    })
+                });
+    });
 
     //get the window's hash value
     var hashVal = "fragments/" + window.location.hash + ".html";
@@ -170,9 +170,9 @@ $(document).ready(function() {
             hashVal,
             function(data) {
                 console.log(data);
-                $("#content").html(data);
+                $("#data").html(data);
 
-            })
+            });
 
     //this is for the nav, toggle class
     //  $('.menu').hide();
