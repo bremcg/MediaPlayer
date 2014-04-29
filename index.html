@@ -275,32 +275,32 @@ $(document).ready(function() {
 
 
     //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
-    $("#albums").on("click", ".albumLink", function() {
-        var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
-        albumsinfoDiv.html(albumInfoTemplate(albumInfo));
-        console.log(albums[$(this).data('id')]);
+    //$("#albums").on("click", ".albumLink", function() {
+      //  var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
+        //albumsinfoDiv.html(albumInfoTemplate(albumInfo));
+        //console.log(albums[$(this).data('id')]);
 
 
         //get the data
-        var templateData = albums[$(this).data('id')]
+        //var templateData = albums[$(this).data('id')]
         //generate html
-        var toAdd = albumInfoTemplate(templateData);
+        //var toAdd = albumInfoTemplate(templateData);
         //show in infor div
-        infoDiv.html(toAdd);
+        //infoDiv.html(toAdd);
 
         //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
-    })
+    //})
 
 
 
-    $("#genres").on("click", ".genreLink", function() {
-        var genreToFind = $(this).html();
-        var results = {};
+   // $("#genres").on("click", ".genreLink", function() {
+     //   var genreToFind = $(this).html();
+       // var results = {};
 
-        results.albums = _.where(albums, {genre: genreToFind});
+        //results.albums = _.where(albums, {genre: genreToFind});
 
-        browseDiv.html(albumLinkTemplate(results));
-    })
+        //browseDiv.html(albumLinkTemplate(results));
+    //})
 
     $("#btnSearch").click(function() {
         //get the search term

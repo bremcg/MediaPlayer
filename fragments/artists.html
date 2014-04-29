@@ -105,7 +105,7 @@ $(document).ready(function() {
 
 
     //templates
-    var hompageTemplate = Handlebars.compile($("#homePage").html());
+    //var hompageTemplate = Handlebars.compile($("#homePage").html());
     var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
     var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
    // var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
@@ -115,16 +115,16 @@ $(document).ready(function() {
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-        image = data.albums.image;
-        $("#content").append(albumLinkTemplate(data));
+        image = albums.image;
+        //$("#content").append(albumLinkTemplate(data));//this should only display on homepage
         //genreDiv.html(genreLinkTemplate(data.genres));
         artistDiv.html(artistsLinkTemplate(data.artistName));
-    })
+    });
 
 
     //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
     $("#albums").on("click", ".albumLink", function() {
-        var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
+        var albumInfo = _.findWhere(albums, {id: $(this).data('id')});
         albumsinfoDiv.html(albumInfoTemplate(albumInfo));
         console.log(albums[$(this).data('id')]);
 
@@ -136,8 +136,7 @@ $(document).ready(function() {
         //show in infor div
         infoDiv.html(toAdd);
 
-        //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
-    })
+    });
 
 
     //this finds id of the album when you click on artist and displays in #browse
@@ -149,7 +148,7 @@ $(document).ready(function() {
         results.albums = _.where(albums, {artist: artistToFind});
 
         browseDiv.html(albumLinkTemplate(results));
-    }) 
+    }); 
 
     $("#btnSearch").click(function() {
         //get the search term
@@ -157,7 +156,7 @@ $(document).ready(function() {
         //object to store any results
         var results = {
             albums: []
-        }
+        };
 
         //loop through all of our albums
         results.albums = _.filter(albums, function(item) {
@@ -165,20 +164,9 @@ $(document).ready(function() {
             var titleSplit = item.title.split(" ");
             return _.find(titleSplit, function(titleWord) {
                 return titleWord.toUpperCase() == searchTerm.toUpperCase();
-            })
-        })
-        /*for(var i = 0; i < books.length; i++) {
-         //split the book's name into individual words
-         var titleSplit = books[i].title.split(" ");
-         
-         //loop through those words
-         for(var y = 0; y < titleSplit.length; y++) {
-         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
-         results.books.push(books[i]);
-         break;
-         }
-         }
-         }*/
+            });
+        });
+
 
         browseDiv.html(albumLinkTemplate(results));
 

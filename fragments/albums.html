@@ -91,7 +91,7 @@
         
         <script>
 var albums;
-var tracks;
+
 
 $(document).ready(function() {
    
@@ -100,17 +100,13 @@ $(document).ready(function() {
     //cached DOM references
     var infoDiv = $("#info");
     var browseDiv = $("#browse");
-    var genreDiv = $("#genres");
     var albumsDiv = $("#albums");
-    var artistDiv = $("#artists");
 
 
     //templates
     //var hompageTemplate = Handlebars.compile($("#homePage").html());
-    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
-    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
-    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
-   // var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
+    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//this displays info to browse div
+    //var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
     //below is compile for albumsTitle array to display on albums page
     var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
 
@@ -118,13 +114,16 @@ $(document).ready(function() {
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-        image = data.albums.image;
-        $("#content").append(albumLinkTemplate(data));
-        genreDiv.html(genreLinkTemplate(data.genres));
-        albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
-        artistDiv.html(artistLinkTemplate(data.artist));
+        image = albums.image;
+        //tracks = albums.tracks.name;
         
-    })
+        
+        //$("#content").append(albumLinkTemplate(data));//this should only go on homepage
+       // genreDiv.html(genreLinkTemplate(data.genres));
+        albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
+        //artistDiv.html(artistLinkTemplate(data.artist));
+        
+    });
 
 
     //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
@@ -142,7 +141,7 @@ $(document).ready(function() {
         infoDiv.html(toAdd);
 
         //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
-    })
+    });
     
     //this finds id when you click on albums and displays in #browse
     //IT WORKS!!!!
@@ -153,7 +152,7 @@ $(document).ready(function() {
         results.albums = _.where(albums, {title: albumToFind});
 
         browseDiv.html(albumLinkTemplate(results));
-    })    
+    });    
     
     
     
@@ -164,7 +163,7 @@ $(document).ready(function() {
         //object to store any results
         var results = {
             albums: []
-        }
+        };
 
         //loop through all of our albums
         results.albums = _.filter(albums, function(item) {
@@ -172,13 +171,13 @@ $(document).ready(function() {
             var titleSplit = item.title.split(" ");
             return _.find(titleSplit, function(titleWord) {
                 return titleWord.toUpperCase() == searchTerm.toUpperCase();
-            })
-        })
+            });
+        });
 
         browseDiv.html(albumLinkTemplate(results));
 
-    })
-})
+    });
+});
         </script>          
         
         
