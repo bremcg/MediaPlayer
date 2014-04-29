@@ -79,7 +79,7 @@
             <div class="albumDate">{{date}}</div>  
             <h1>Tracks</h1>
     {{#each tracks}}
-    <li class="tracksLink">{{this}}</li>
+    <li class="tracksLink">{{albums.tracks}}</li>
     {{/each}}
             </div>
         </script>      
@@ -132,7 +132,7 @@ $(document).ready(function() {
 
     //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
     $("#albums").on("click", ".albumLink", function() {
-        var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
+        var albumInfo = _.findWhere(albums, {id: $(this).data('id')});
         albumsinfoDiv.html(albumInfoTemplate(albumInfo));
         console.log(albums[$(this).data('id')]);
 
