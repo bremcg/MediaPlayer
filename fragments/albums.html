@@ -1,5 +1,5 @@
 <html>
-	<head>
+    <head>
         <title>A Music Player</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
         <link rel="stylesheet" type="text/css" href="../style.css" />
@@ -9,33 +9,33 @@
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/handlebars-v1.3.0.js"></script>
         <script type="text/javascript" src="../js/underscore-min.js"></script>    
-	</head>
-<body>
-        
-<!-- This page will display then albums for user to select -->            
-                    <!--This will display either Genre Type, Album Name, or Artist Name-->
-                    <!-- start of an experiment to slide the option to the left-->
-                    <div id="contentSubOne">
-                        <div id="albums"></div>
-                        <div id="browse"></div> <!-- this div will display to the right with more info -->
-                    </div>
+    </head>
+    <body>
 
-                    <div id="info"></div>
+        <!-- This page will display then albums for user to select -->            
+        <!--This will display either Genre Type, Album Name, or Artist Name-->
+        <!-- start of an experiment to slide the option to the left-->
+        <div id="contentSubOne">
+            <div id="albums"></div>
+            <div id="browse"></div> <!-- this div will display to the right with more info -->
+        </div>
 
-                    <!--clear floats and whatever-->
-                    <div style="clear:both; width:100%" ></div>
+        <div id="info"></div>
 
-                    <!--Search--> 
-                    <div id="search">
-                        <div>Search for</div>
-                        <div>Title: <input id="txtSearch" /></div>
-                        <div><input id="btnSearch" type="button" value="search" /></div>
-                    </div>            
- 
+        <!--clear floats and whatever-->
+        <div style="clear:both; width:100%" ></div>
+
+        <!--Search--> 
+        <div id="search">
+            <div>Search for</div>
+            <div>Title: <input id="txtSearch" /></div>
+            <div><input id="btnSearch" type="button" value="search" /></div>
+        </div>            
+
         <script id="homePage" type="text/x-handlebars-template">
             Its {{name}}! Just listening to music and stuff.
         </script>   
-       
+
 
         <!-- home jpage list of albums template -->
         <script id="albumLinks" type="text/x-handlebars-template">
@@ -50,7 +50,7 @@
             {{/each}}	
             </ul>
         </script>  
-        
+
         <!-- albums links IT WORKED!! -->
         <!-- this will create the links to display all albums from albumTitle array created in JSON -->
         <script id="albumsLinks" type="text/x-handlebars-template">
@@ -58,7 +58,7 @@
             {{#each this}}
             <li class="albumsLink">{{this}}</li>
             {{/each}}
-            </ul>            
+            </ul>
         </script>
         <!-- this script above should display a list of albums to click.. ->
 
@@ -76,7 +76,11 @@
             <div>
             <div class="albumArtist">{{artist}}</div> 
             <div class="albumTitle">{{title}}</div>
-            <div class="albumDate">{{date}}</div>
+            <div class="albumDate">{{date}}</div>  
+            <h1>Tracks</h1>
+    {{#each tracks}}
+    <li class="tracksLink">{{this}}</li>
+    {{/each}}
             </div>
         </script>      
 
@@ -88,13 +92,13 @@
             {{/each}}
             </ul>
         </script>          
-        
+
         <script>
 var albums;
 
 
 $(document).ready(function() {
-   
+
 //below starts getting information from JSON file                    
 
     //cached DOM references
@@ -106,7 +110,7 @@ $(document).ready(function() {
     //templates
     //var hompageTemplate = Handlebars.compile($("#homePage").html());
     var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//this displays info to browse div
-    //var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
+    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
     //below is compile for albumsTitle array to display on albums page
     var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
 
@@ -116,13 +120,13 @@ $(document).ready(function() {
         albums = data.albums;
         image = albums.image;
         //tracks = albums.tracks.name;
-        
-        
+
+
         //$("#content").append(albumLinkTemplate(data));//this should only go on homepage
-       // genreDiv.html(genreLinkTemplate(data.genres));
+        // genreDiv.html(genreLinkTemplate(data.genres));
         albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
         //artistDiv.html(artistLinkTemplate(data.artist));
-        
+
     });
 
 
@@ -142,7 +146,7 @@ $(document).ready(function() {
 
         //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
     });
-    
+
     //this finds id when you click on albums and displays in #browse
     //IT WORKS!!!!
     $("#albums").on("click", ".albumsLink", function() {
@@ -152,10 +156,10 @@ $(document).ready(function() {
         results.albums = _.where(albums, {title: albumToFind});
 
         browseDiv.html(albumLinkTemplate(results));
-    });    
-    
-    
-    
+    });
+
+
+
 
     $("#btnSearch").click(function() {
         //get the search term
@@ -179,8 +183,8 @@ $(document).ready(function() {
     });
 });
         </script>          
-        
-        
-        
-</body>
+
+
+
+    </body>
 </html>
