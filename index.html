@@ -18,9 +18,10 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-
+    <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
 
         <div id="banner">
+        
             <h1>BreLiz Playlist</h1>
 
             <div id="nav"><!--navDiv-->
@@ -42,25 +43,30 @@ Description: The main index for our music player
                 </ul>
             </div><!--end navDiv-->
         </div><!-- end banner and nav elements -->
-
-        <div id="musicPlayer">
-            <img src="daybreak/_screenshot.png" />
-            <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
-        </div><!--end musicPlayer-->               
-
         <!-- content goes here.. -->
         <div id="content">
+            <!-- if we want something on the homepage only it goes here in #content div --> 
 
-            <!-- if we want something on the homepage only it goes here in #content div -->            
+        <!--new music player-->
+        <div id="musicPlayer">
+        <div class="playerInfo">
+            <div id="song" class="info">Song Playing</div>
+            <div id="artist" class="info">Artist Name</div>
+        </div>
+            <div class="controls">
+                <div id="play"><img src="img/play.png" alt="Play" style="width: 40px; height=40px;"></div>
+                <div id="stop"><img src="img/pause.png" alt="Pause" style="width: 40px; height=40px;"></div>
+           <div class="time">
+              <div id="duration"></div>
+           </div>
+       </div>
+        </div><!--end music player-->           
+
 
             <div id="data">
                 <!--This will display either Genre Type, Album Name, or Artist Name-->
             </div><!-- end #data -->
-
         </div><!-- end #content -->
-
-
-
 
 
         <script id="homePage" type="text/x-handlebars-template">
