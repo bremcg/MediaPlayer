@@ -9,7 +9,7 @@
             "bio": "This is a bio.",
             "date": "1998",
             "genre": "Dance",  
-            "image": "path.png",
+            "image": "img/Air.png",
             "tracks": [
                 {"name": "Le LeVoyage de Penelope", "audio": "playlist/LeVoyageDePenelope.m4a"},
                 {"name": "La Femme de Argent", "audio": "playlist/Lafemmedargent.m4a"}
@@ -22,7 +22,7 @@
             "bio": "This is a bio.",
             "date": "1975",
             "genre": "Rock",
-            "image": "path.png",
+            "image": "img/Love.png",
             "tracks": [
                 {"name": "Glass Onion", "audio": "playlist/GlassOnion.m4a"},
                 {"name": "I am the Walrus", "audio": "playlist/IAmTheWalrus.m4a"},
@@ -46,7 +46,7 @@
             "bio": "This is a bio.",
             "date": "1979",
             "genre": "Blues",
-            "image": "path.png",
+            "image": "img/LedZeppelin2.png",
             "tracks": [
                 {"name": "Whole Lotta Love", "audio": "playlist/WholeLottaLove.mp3"},
                 {"name": "What Is And What Should Never ", "audio": "playlist/WhatIsAndWhatShouldNever.mp3"},
@@ -66,7 +66,7 @@
             "bio": "This is a bio.",
             "date": "2009",
             "genre": "Alternative",
-            "image": "path.png",
+            "image": "img/TheSantanicSantanist.png",
             "tracks": [
                 {"name": "Lovers In Love", "audio": "playlist/LoversInLove.m4a"},
                 {"name": "Work All Day", "audio": "playlist/WorkAllDay.m4a"},
@@ -82,7 +82,7 @@
             "bio": "This is a bio.",
             "date": "2010",
             "genre": "Rock",
-            "image": "path.png",
+            "image": "img/TameImpala.png",
             "tracks": [
                 {"name": "Desire Be Desire Go", "audio": "playlist/DesireBeDesireGo.mp3"},
                 {"name": "Skeleton Tiger", "audio": "playlist/SkeletonTiger.mp3"}

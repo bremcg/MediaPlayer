@@ -1,18 +1,18 @@
 <html>
     <head>
         <title>A Music Player</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../style.css" />
         <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <script src="../js/jquery-2.0.3.min.js"></script>   
+        <script src="../js/jquery-2.0.3.min.js"></script>
         <script src="../js/main.js"></script>
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/handlebars-v1.3.0.js"></script>
-        <script type="text/javascript" src="../js/underscore-min.js"></script>    
+        <script type="text/javascript" src="../js/underscore-min.js"></script>
     </head>
     <body>
             
-<!-- This page will display then genres for user to select -->            
+<!-- This page will display then genres for user to select -->
                     <!--This will display either Genre Type, Album Name, or Artist Name-->
                     <!-- start of an experiment to slide the option to the left-->
                     <div id="contentSubOne">
@@ -25,42 +25,33 @@
                     <!--clear floats and whatever-->
                     <div style="clear:both; width:100%" ></div>
 
-                    <!--Search--> 
+                    <!--Search-->
                     <div id="search">
-                        Search for Title: <input id="txtSearch" />
-                        <input class="button" id="btnSearch" type="button" value="Find It!" />
-                    </div>            
+                        <div>Search for</div>
+                        <div>Title: <input id="txtSearch" /></div>
+                        <div><input id="btnSearch" type="button" value="search" /></div>
+                    </div>
  
         <script id="homePage" type="text/x-handlebars-template">
             Its {{name}}! Just listening to music and stuff.
-        </script>   
-        <!-- home jpage list of albums template -->
-        <script id="albumHomeLinks" type="text/x-handlebars-template">
-            <ul class="album_list">
-            {{#each albums}}
-            <li class="albumLink" data-id="{{this.id}}">
-            {{this.artist}}
-            {{this.title}}
-            {{this.date}}
-            {{this.image}}
-            </li>
-            {{/each}}	
-            </ul>
-        </script>        
+        </script>
+        
+        
+        <!--template to display album title, artist name, and tracks -->
+        <script id="tracksLinks" type="text/x-handlebars-template">
 
-        <!-- home jpage list of albums template -->
-        <script id="albumLinks" type="text/x-handlebars-template">
-            <ul class="album_list">
+            <ul class="tracks_list">
             {{#each albums}}
-            <li class="albumLink" data-id="{{this.id}}">
-            {{this.artist }} -
-            {{this.title}} -
-            {{this.date}} - 
-            {{this.image}}
+            <li class="trackLink" data-id="{{this.id}}">
+            <li class="trackLink">{{this.artist}}</li>
+            {{#each this.tracks}}
+            <li class="trackLink">{{this.name}}</li>
+            {{/each}}
             </li>
             {{/each}}	
-            </ul>
-        </script>          
+            </ul>    
+        </script> 
+  
 
         <!-- genre links -->
         <script id="genreLinks" type="text/x-handlebars-template">
@@ -69,33 +60,14 @@
             <li class="genreLink">{{this}}</li>
             {{/each}}
             </ul>
-        </script>
-
-        <!-- album info template -->
-        <script id="albumInfo" type="text/x-handlebars-template">
-            <div>
-            <div class="albumArtist">{{artist}}</div> 
-            <div class="albumTitle">{{title}}</div>
-            <div class="albumDate">{{date}}</div>
-            </div>
-        </script>      
-
-        <!-- album info template -->
-        <script id="artistLinks" type="text/x-handlebars-template">
-            <ul class="artist_links">
-            {{#each this}}
-            <li class="artistLink">{{this}}</li>
-            {{/each}}
-            </ul>
-        </script>          
+        </script>        
         
         <script>
 var albums;
-var tracks;
 
 $(document).ready(function() {
 
-//below starts getting information from JSON file                    
+//below starts getting information from JSON file
 
     //cached DOM references
     var infoDiv = $("#info");
@@ -105,33 +77,16 @@ $(document).ready(function() {
 
     //templates
    // var hompageTemplate = Handlebars.compile($("#homePage").html());
-    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
+    var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());
     var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
 
 
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-        image = data.albums.image;
         
+        //template of genreLinks displayed..
         genreDiv.html(genreLinkTemplate(data.genres));
-
-    });
-
-
-    //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
-    $("#albums").on("click", ".albumLink", function() {
-        var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
-        albumsinfoDiv.html(albumInfoTemplate(albumInfo));
-        console.log(albums[$(this).data('id')]);
-
-
-        //get the data
-        var templateData = albums[$(this).data('id')]
-        //generate html
-        var toAdd = albumInfoTemplate(templateData);
-        //show in infor div
-        infoDiv.html(toAdd);
 
     });
 
@@ -143,7 +98,7 @@ $(document).ready(function() {
 
         results.albums = _.where(albums, {genre: genreToFind});
 
-        browseDiv.html(albumLinkTemplate(results));
+        browseDiv.html(tracksLinkTemplate(results));
     });
 
     $("#btnSearch").click(function() {
@@ -163,23 +118,22 @@ $(document).ready(function() {
             })
         })
         /*for(var i = 0; i < books.length; i++) {
-         //split the book's name into individual words
-         var titleSplit = books[i].title.split(" ");
-         
-         //loop through those words
-         for(var y = 0; y < titleSplit.length; y++) {
-         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
-         results.books.push(books[i]);
-         break;
-         }
-         }
-         }*/
+//split the book's name into individual words
+var titleSplit = books[i].title.split(" ");
+//loop through those words
+for(var y = 0; y < titleSplit.length; y++) {
+if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
+results.books.push(books[i]);
+break;
+}
+}
+}*/
 
         browseDiv.html(albumLinkTemplate(results));
 
     })
 })
-        </script>          
+        </script>
         
         
         

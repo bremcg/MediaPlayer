@@ -35,62 +35,10 @@
             Its {{name}}! Just listening to music and stuff.
         </script>   
 
+  
 
-        <!-- home jpage list of albums template -->
-        <script id="albumLinks" type="text/x-handlebars-template">
-            <ul class="album_list">
-            {{#each albums}}
-            <li class="albumLink" data-id="{{this.id}}">
-            {{this.artist }} -
-            {{this.title}} -
-            {{this.date}} - 
-            {{this.image}}
-            </li>
-            {{/each}}	
-            </ul>
-        </script>  
 
-        <!-- albums links IT WORKED!! -->
-        <!-- this will create the links to display all albums from albumTitle array created in JSON -->
-        <script id="albumsLinks" type="text/x-handlebars-template">
-            <ul class="albums_links">
-            {{#each this}}
-            <li class="albumsLink">{{this}}</li>
-            {{/each}}
-            </ul>
-        </script>
-        <!-- this script above should display a list of albums to click.. ->
-
-        <!-- genre links -->
-        <script id="genreLinks" type="text/x-handlebars-template">
-            <ul class="genre_links">
-            {{#each this}}
-            <li class="genreLink">{{this}}</li>
-            {{/each}}
-            </ul>
-        </script>
-
-        <!-- album info template -->
-        <script id="albumInfo" type="text/x-handlebars-template">
-            <div>
-            <div class="albumArtist">{{artist}}</div> 
-            <div class="albumTitle">{{title}}</div>
-            <div class="albumDate">{{date}}</div>  
-            <h1>Tracks</h1>
-    {{#each tracks}}
-    <li class="tracksLink">{{albums.tracks}}</li>
-    {{/each}}
-            </div>
-        </script>      
-
-        <!-- album info template -->
-        <script id="artistLinks" type="text/x-handlebars-template">
-            <ul class="artist_links">
-            {{#each this}}
-            <li class="artistLink">{{this}}</li>
-            {{/each}}
-            </ul>
-        </script>          
+          
 
         <script>
 var albums;
@@ -117,33 +65,10 @@ $(document).ready(function() {
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-        image = albums.image;
-        //tracks = albums.tracks.name;
-
-
-        //$("#content").append(albumLinkTemplate(data));//this should only go on homepage
-        // genreDiv.html(genreLinkTemplate(data.genres));
+ 
+        //this display the albums list from object albumTitle in JSON file.
         albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
-        //artistDiv.html(artistLinkTemplate(data.artist));
-
-    });
-
-
-    //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
-    $("#albums").on("click", ".albumLink", function() {
-        var albumInfo = _.findWhere(albums, {id: $(this).data('id')});
-        albumsinfoDiv.html(albumInfoTemplate(albumInfo));
-        console.log(albums[$(this).data('id')]);
-
-
-        //get the data
-        var templateData = albums[$(this).data('id')]
-        //generate html
-        var toAdd = albumInfoTemplate(templateData);
-        //show in infor div
-        infoDiv.html(toAdd);
-
-        //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
+ 
     });
 
     //this finds id when you click on albums and displays in #browse

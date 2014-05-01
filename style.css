@@ -270,3 +270,56 @@ h2.close {
 #duration {
 
 }
+
+
+/*Below is for the template data*/
+
+/*Display Genre List*/
+ul.genre_links  {
+    
+}
+
+li.genreLink    {
+    
+}
+
+/*Display Album List*/
+ul.albums_links   {
+    
+}
+li.albumsLink    {
+    
+}
+
+/*Display artists List*/
+ul.artists_Links    {
+    
+}
+li.artistsLink{
+    
+}
+
+/*Display tracks List in browse div*/
+ul.tracks_list  {
+    
+}
+li.trackLink    {
+   padding-bottom: 1%; 
+}
+
+/*Display album info List in browse div*/
+ul.album_list   {
+    
+}
+li.albumLink    {
+   padding-bottom: 1%; 
+}
+
+/*Display artist info List in browse div*/
+ul.artist_display   {
+    
+}
+li.artistDetails{
+    padding-bottom: 1%;
+}
+
