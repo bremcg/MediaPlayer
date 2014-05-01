@@ -18,7 +18,8 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-    <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
+
+    <audio id="playlist" preload="auto" tabindex="0" autoplay="" loop=""></audio>
 
         <div id="banner">
         
@@ -70,6 +71,59 @@ Description: The main index for our music player
         
         
 
+        <!--getting music to play-->
+        <script type="text/javascript">
+            
+            var songIndex = 0;
+            var song;
+            var music;
+            var playing;
+        
+            $(document).ready(function() {
+                $.getJSON(
+                    "data/data.json",
+                    function(data) {
+
+                        music = data.albums[1].tracks[1].audio;
+                        playing = music;
+                        console.log("playing");
+
+                        //set first sound
+                        $("#playlist").attr("src", data.tracks);
+                        console.log("song is playing");
+                        
+                        //audio object
+                        song = document.getElementById("playlist");
+                        
+                        //ended event
+                        song.addEventListener("ended", function() {
+                            //next song index
+                            songIndex++;
+                            //song index is less than all songs
+                            if(songIndex < data.albums.tracks.audio.length) {
+                                //set sound
+                                $("#playlist").attr("src", data.albums[].tracks[].audio;);
+                                //play sound
+                                song.play();
+
+                                //display artist info
+                                $("artist").html(data.albums.artist[artistIndex]);
+
+                                //display song name
+                                $("song").html(data.albums.tracks.name[tracksIndex]);
+
+                            } else {
+                                //all sounds finished playing
+                            }
+                        });
+                        //play first sound
+                        song.play();
+                    }
+                );
+            });
+        </script> <!--end music player script-->
+
+       
 
         <!--template to display album title, artist name, and tracks -->
         <script id="albumHomeLinks" type="text/x-handlebars-template">
@@ -311,6 +365,13 @@ $(document).ready(function() {
         albumsDiv.html(albumLinkTemplate(data.albums));
         artistDiv.html(artistLinkTemplate(data.artist));
     })
+
+
+
+
+
+
+
 
 
     //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
