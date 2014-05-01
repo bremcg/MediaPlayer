@@ -347,14 +347,13 @@ $(document).ready(function() {
     //templates
     var hompageTemplate = Handlebars.compile($("#homePage").html());
     var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
-    //template for search - albumInfo?
+    var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());
     var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
     //template for genre LINKS created from array genres in json
     var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
-    //var albumLinkTemplate = Handlebars.compile($("#albumLinks").html());
     var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());
-    //var artistLinkTemplate = Handlebars.compile($("#artistLinks").html());
-    //var artistInfoTemplate = Handlebars.compile($("#artistInfo").html());
+
+
 
 
     $.getJSON('data/data.json', function(data) {
