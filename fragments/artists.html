@@ -1,5 +1,5 @@
 <html>
-	<head>
+    <head>
         <title>A Music Player</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
         <link rel="stylesheet" type="text/css" href="../style.css" />
@@ -9,31 +9,31 @@
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/handlebars-v1.3.0.js"></script>
         <script type="text/javascript" src="../js/underscore-min.js"></script>    
-	</head>
-	<body>
-            
-<!-- This page will display then artists for user to select -->            
-                    <!--This will display either Genre Type, Album Name, or Artist Name-->
-                    <!-- start of an experiment to slide the option to the left-->
-                    <div id="contentSubOne">
-                        <div id="artists"></div>
-                        <div id="browse"></div> <!-- this div will display to the right with more info -->
-                    </div>
+    </head>
+    <body>
 
-                    <div id="info"></div>
+        <!-- This page will display then artists for user to select -->            
+        <!--This will display either Genre Type, Album Name, or Artist Name-->
+        <!-- start of an experiment to slide the option to the left-->
+        <div id="contentSubOne">
+            <div id="artists"></div>
+            <div id="browse"></div> <!-- this div will display to the right with more info -->
+        </div>
 
-                    <!--clear floats and whatever-->
-                    <div style="clear:both; width:100%" ></div>
+        <div id="info"></div>
 
-                    <!--Search--> 
-                    <div id="search">
-                        Search for Title: <input id="txtSearch" />
-                        <input class="button" id="btnSearch" type="button" value="Find It!" />
-                    </div>             
+        <!--clear floats and whatever-->
+        <div style="clear:both; width:100%" ></div>
 
- 
-        
-        
+        <!--Search--> 
+        <div id="search">
+            Search for Title: <input id="txtSearch" />
+            <input class="button" id="btnSearch" type="button" value="Find It!" />
+        </div>             
+
+
+
+
         <script id="artistDisplay" type="text/x-handlebars-template">
             <ul class="artist_Details">
             {{#each albums}}
@@ -45,7 +45,7 @@
             {{/each}}	
             </ul>
         </script>         
-        
+
         <!-- artists links IT WORKED!! -->
         <!-- this will create the links to display all artists from albumTitle array created in JSON -->
         <script id="artistsLinks" type="text/x-handlebars-template">
@@ -66,78 +66,78 @@
             <div class="albumDate">{{date}}</div>
             </div>
         </script>      
-        
-        
-        <script>
-var albums;
-var tracks;
 
-$(document).ready(function() {
+
+        <script>
+            var albums;
+            var tracks;
+
+            $(document).ready(function() {
 
 //below starts getting information from JSON file                    
 
-    //cached DOM references
-    var infoDiv = $("#info");
-    var browseDiv = $("#browse");
-    var artistDiv = $("#artists");
+                //cached DOM references
+                var infoDiv = $("#info");
+                var browseDiv = $("#browse");
+                var artistDiv = $("#artists");
 
 
-    //templates
-    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
-    var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());
-    //below is compile for artistName array to display on artists page
-    var artistsLinkTemplate = Handlebars.compile($("#artistsLinks").html());//this worked!!
+                //templates
+                var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
+                var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());
+                //below is compile for artistName array to display on artists page
+                var artistsLinkTemplate = Handlebars.compile($("#artistsLinks").html());//this worked!!
 
-    $.getJSON('data/data.json', function(data) {
-        albums = data.albums;
-        
-        //this displays the artists list from object artistName in JSON file
-        artistDiv.html(artistsLinkTemplate(data.artistName));
-    });
+                $.getJSON('data/data.json', function(data) {
+                    albums = data.albums;
 
-    //get the data
-    var templateData = albums[$(this).data('id')];
-    //generate html
-    var toAdd = albumInfoTemplate(templateData);
-    //show in infor div
-    infoDiv.html(toAdd);
+                    //this displays the artists list from object artistName in JSON file
+                    artistDiv.html(artistsLinkTemplate(data.artistName));
+                });
 
-    //this finds id of the album when you click on artist and displays in #browse
-    //IT WORKS!!!!
-    $("#artists").on("click", ".artistsLink", function() {
-        var artistToFind = $(this).html();
-        var results = {};
+                //get the data
+                var templateData = albums[$(this).data('id')];
+                //generate html
+                var toAdd = albumInfoTemplate(templateData);
+                //show in infor div
+                infoDiv.html(toAdd);
 
-        results.albums = _.where(albums, {artist: artistToFind});
+                //this finds id of the album when you click on artist and displays in #browse
+                //IT WORKS!!!!
+                $("#artists").on("click", ".artistsLink", function() {
+                    var artistToFind = $(this).html();
+                    var results = {};
 
-        browseDiv.html(artistDisplayTemplate(results));
-    }); 
+                    results.albums = _.where(albums, {artist: artistToFind});
 
-    $("#btnSearch").click(function() {
-        //get the search term
-        var searchTerm = $("#txtSearch").val();
-        //object to store any results
-        var results = {
-            albums: []
-        };
+                    browseDiv.html(artistDisplayTemplate(results));
+                });
 
-        //loop through all of our albums
-        results.albums = _.filter(albums, function(item) {
-            //return (item.title.indexOf(searchTerm) != -1);
-            var titleSplit = item.title.split(" ");
-            return _.find(titleSplit, function(titleWord) {
-                return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                $("#btnSearch").click(function() {
+                    //get the search term
+                    var searchTerm = $("#txtSearch").val();
+                    //object to store any results
+                    var results = {
+                        albums: []
+                    };
+
+                    //loop through all of our albums
+                    results.albums = _.filter(albums, function(item) {
+                        //return (item.title.indexOf(searchTerm) != -1);
+                        var titleSplit = item.title.split(" ");
+                        return _.find(titleSplit, function(titleWord) {
+                            return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                        });
+                    });
+
+
+                    browseDiv.html(albumLinkTemplate(results));
+
+                });
             });
-        });
-
-
-        browseDiv.html(albumLinkTemplate(results));
-
-    })
-})
         </script>          
-        
-        
-        
-        </body>
+
+
+
+    </body>
 </html>

@@ -24,7 +24,7 @@
 
         <!--clear floats and whatever-->
         <div style="clear:both; width:100%" ></div>
-        
+
         <!--Search--> 
         <div id="search">
             Search for Title: <input id="txtSearch" />
@@ -35,77 +35,77 @@
             Its {{name}}! Just listening to music and stuff.
         </script>   
 
-  
 
 
-          
+
+
 
         <script>
-var albums;
+            var albums;
 
 
-$(document).ready(function() {
+            $(document).ready(function() {
 
 //below starts getting information from JSON file                    
 
-    //cached DOM references
-    var infoDiv = $("#info");
-    var browseDiv = $("#browse");
-    var albumsDiv = $("#albums");
+                //cached DOM references
+                var infoDiv = $("#info");
+                var browseDiv = $("#browse");
+                var albumsDiv = $("#albums");
 
 
-    //templates
-    //var hompageTemplate = Handlebars.compile($("#homePage").html());
-    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//this displays info to browse div
-    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
-    //below is compile for albumsTitle array to display on albums page
-    var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
-
-
-
-    $.getJSON('data/data.json', function(data) {
-        albums = data.albums;
- 
-        //this display the albums list from object albumTitle in JSON file.
-        albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
- 
-    });
-
-    //this finds id when you click on albums and displays in #browse
-    //IT WORKS!!!!
-    $("#albums").on("click", ".albumsLink", function() {
-        var albumToFind = $(this).html();
-        var results = {};
-
-        results.albums = _.where(albums, {title: albumToFind});
-
-        browseDiv.html(albumLinkTemplate(results));
-    });
+                //templates
+                //var hompageTemplate = Handlebars.compile($("#homePage").html());
+                var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//this displays info to browse div
+                var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
+                //below is compile for albumsTitle array to display on albums page
+                var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
 
 
 
+                $.getJSON('data/data.json', function(data) {
+                    albums = data.albums;
 
-    $("#btnSearch").click(function() {
-        //get the search term
-        var searchTerm = $("#txtSearch").val();
-        //object to store any results
-        var results = {
-            albums: []
-        };
+                    //this display the albums list from object albumTitle in JSON file.
+                    albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
 
-        //loop through all of our albums
-        results.albums = _.filter(albums, function(item) {
-            //return (item.title.indexOf(searchTerm) != -1);
-            var titleSplit = item.title.split(" ");
-            return _.find(titleSplit, function(titleWord) {
-                return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                });
+
+                //this finds id when you click on albums and displays in #browse
+                //IT WORKS!!!!
+                $("#albums").on("click", ".albumsLink", function() {
+                    var albumToFind = $(this).html();
+                    var results = {};
+
+                    results.albums = _.where(albums, {title: albumToFind});
+
+                    browseDiv.html(albumLinkTemplate(results));
+                });
+
+
+
+
+                $("#btnSearch").click(function() {
+                    //get the search term
+                    var searchTerm = $("#txtSearch").val();
+                    //object to store any results
+                    var results = {
+                        albums: []
+                    };
+
+                    //loop through all of our albums
+                    results.albums = _.filter(albums, function(item) {
+                        //return (item.title.indexOf(searchTerm) != -1);
+                        var titleSplit = item.title.split(" ");
+                        return _.find(titleSplit, function(titleWord) {
+                            return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                        });
+                    });
+
+                    browseDiv.html(albumLinkTemplate(results));
+
+                });
             });
-        });
-
-        browseDiv.html(albumLinkTemplate(results));
-
-    });
-});
         </script>          
 
 
