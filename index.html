@@ -77,16 +77,16 @@ Description: The main index for our music player
             var songIndex = 0;
             var song;
             var music;
-            var playing;
+            var playingNow;
         
             $(document).ready(function() {
                 $.getJSON(
                     "data/data.json",
                     function(data) {
 
-                        music = data.albums[1].tracks[1].audio;
-                        playing = music;
-                        console.log("playing");
+                        music = data.tracks;
+                        playingNow = music;
+                        console.log("playingNow");
 
                         //set first sound
                         $("#playlist").attr("src", data.tracks);
@@ -100,9 +100,9 @@ Description: The main index for our music player
                             //next song index
                             songIndex++;
                             //song index is less than all songs
-                            if(songIndex < data.albums.tracks.audio.length) {
+                            if(songIndex < data.tracks.length) {
                                 //set sound
-                                $("#playlist").attr("src", data.albums[].tracks[].audio;);
+                                $("#playlist").attr("src", data.tracks[songIndex]);
                                 //play sound
                                 song.play();
 

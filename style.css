@@ -222,7 +222,7 @@ h2.close {
     padding: 10px;
     padding-left: 5px;
     padding-right: 5px;
-    background: -moz-linear-gradient(top, #ddd, #fff) repeat-x;
+    background: -moz-linear-gradient(top, #ddd, #fff) repeat-X;
     background: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff)) repeat-x;
     border-radius: 10px;
 }
