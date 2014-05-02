@@ -18,10 +18,10 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-    <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
+        <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
 
         <div id="banner">
-        
+
             <h1>BreLiz Playlist</h1>
 
             <div id="nav"><!--navDiv-->
@@ -47,28 +47,30 @@ Description: The main index for our music player
         <div id="content">
             <!-- if we want something on the homepage only it goes here in #content div --> 
 
-        <!--new music player-->
-        <div id="musicPlayer">
-        <div class="playerInfo">
-            <div id="song" class="info">Song Playing</div>
-            <div id="artist" class="info">Artist Name</div>
-        </div>
-            <div class="controls">
-                <div id="play"><img src="img/play.png" alt="Play" style="width: 40px; height: 40px;"></div>
-                <div id="stop"><img src="img/pause.png" alt="Pause" style="width: 40px; height: 40px;"></div>
-           <div class="time">
-              <div id="duration"></div>
-           </div>
-       </div>
-        </div><!--end music player-->           
+            <!--new music player-->
+            <div id="musicPlayer">
+                <div class="playerInfo">
+                    <div id="song" class="info">Song Playing</div>
+                    <div id="artist" class="info">Artist Name</div>
+                </div>
+                <div class="controls">
+                    <div id="play"><img src="img/play.png" alt="Play" style="width: 40px; height: 40px;"></div>
+                    <div id="stop"><img src="img/pause.png" alt="Pause" style="width: 40px; height: 40px;"></div>
+                    <div class="time">
+                        <div id="duration"></div>
+                    </div>
+                </div>
+            </div><!--end music player-->           
 
 
             <div id="data">
                 <!--This will display either Genre Type, Album Name, or Artist Name-->
             </div><!-- end #data -->
         </div><!-- end #content -->
-        
-        
+
+        <script id="homePage" type="text/x-handlebars-template">
+            Its {{name}}! Just listening to music and stuff.
+        </script>       
 
 
         <!--template to display album title, artist name, and tracks -->
@@ -80,7 +82,7 @@ Description: The main index for our music player
             <li class="albumLink">{{this.title}}</li> 
             <li class="albumLink">{{this.artist}}</li>
             <li class="albumLink"><img src=" {{this.image}} " /></li>
-    
+
             {{#each this.tracks}}
             <li class="albumLink">{{this.name}}</li>
             {{/each}}
@@ -88,7 +90,7 @@ Description: The main index for our music player
             {{/each}}	
             </ul>    
         </script>  
-        
+
         <!--template to display album title, artist name, and tracks -->
         <script id="tracksLinks" type="text/x-handlebars-template">
 
@@ -103,7 +105,7 @@ Description: The main index for our music player
             {{/each}}	
             </ul>    
         </script>         
-        
+
         <!-- this is the template displaying artist name, pic, bio -->
         <script id="artistDisplay" type="text/x-handlebars-template">
 
@@ -117,8 +119,8 @@ Description: The main index for our music player
             {{/each}}	
             </ul>    
         </script> 
-        
-         
+
+
         <!-- albums links IT WORKED!! -->
         <!-- this will create the links to display all albums from albumTitle array created in JSON -->
         <script id="albumsLinks" type="text/x-handlebars-template">
@@ -128,8 +130,8 @@ Description: The main index for our music player
             {{/each}}
             </ul>
         </script>
-        
-        
+
+
         <!-- genre links template -->
         <script id="genreLinks" type="text/x-handlebars-template">
             <ul class="genre_links">
@@ -147,7 +149,7 @@ Description: The main index for our music player
             <div class="albumDate">{{date}}</div>
             </div>
         </script>   
-               
+
 
         <!-- artists links template -->
         <script id="artistLinks" type="text/x-handlebars-template">
@@ -283,22 +285,22 @@ $(document).ready(function() {
 //below starts getting information from JSON file                    
 
     //cached DOM references
-    var infoDiv = $("#info");
-    var browseDiv = $("#browse");
-    var genreDiv = $("#genres");
-    var albumsDiv = $("#albums");
-    var artistDiv = $("#artists");
+    var infoDiv = $("#info");//div for info - search results
+    var browseDiv = $("#browse");//results when you click
+    var genreDiv = $("#genres");//genre links
+    var albumsDiv = $("#albums");//albums links
+    var artistDiv = $("#artists");//artists links
 
 
     //templates
-    var hompageTemplate = Handlebars.compile($("#homePage").html());
-    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());
-    var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());
-    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
+    var hompageTemplate = Handlebars.compile($("#homePage").html());//home page template - has to be there?
+    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//displays album details in browse div and used in search
+    var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());//tracks displayed in browse div
+    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());//for search results?
     //template for genre LINKS created from array genres in json
-    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
-    var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());
-
+    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());//genre links
+    var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());//artist info in browse div
+    var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());//albums links
 
 
 
@@ -306,9 +308,9 @@ $(document).ready(function() {
         albums = data.albums;
         //image = data.albums.image;
         $("#content").append(albumLinkTemplate(data));
-        genreDiv.html(genreLinkTemplate(data.genres));
-        albumsDiv.html(albumLinkTemplate(data.albums));
-        artistDiv.html(artistLinkTemplate(data.artist));
+        genreDiv.html(genreLinkTemplate(data.genres));//genre links
+        albumsDiv.html(albumLinkTemplate(data.albums));//albums links
+        artistDiv.html(artistLinkTemplate(data.artist));//artist links
     })
 
 
