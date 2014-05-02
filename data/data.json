@@ -95,7 +95,9 @@
     
     "albumTitle": [ "Led Zeppelin II", "Love", "Moon Safari", "Tame Impala", "The Satanic Satanist" ],
     
-    "artistName": [ "Air", "Led Zeppelin", "Portugal The Man", "Tame Impala", "The Beatles" ]
+    "artistName": [ "Air", "Led Zeppelin", "Portugal The Man", "Tame Impala", "The Beatles" ],
+
+    "tracks": ["../playlist/LeVoyageDePenelope.m4a", "../playlist/Lafemmedargent.m4a"]
    
    
 }
