@@ -31,10 +31,7 @@
                         <div>Title: <input id="txtSearch" /></div>
                         <div><input id="btnSearch" type="button" value="search" /></div>
                     </div>
- 
-        <script id="homePage" type="text/x-handlebars-template">
-            Its {{name}}! Just listening to music and stuff.
-        </script>
+
         
         
         <!--template to display album title, artist name, and tracks -->
@@ -43,7 +40,6 @@
             <ul class="tracks_list">
             {{#each albums}}
             <li class="trackLink" data-id="{{this.id}}">
-            <li class="trackLink">{{this.artist}}</li>
             {{#each this.tracks}}
             <li class="trackLink">{{this.name}}</li>
             {{/each}}
