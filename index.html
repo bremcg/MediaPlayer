@@ -30,7 +30,6 @@ Description: The main index for our music player
                     <li class="subMenu">
                         <p>Rock</p>
                     </li><!--options-->
-
                     <li id="albumsBtn" class="navBtn">Albums</li>
                     <li class="subMenu">
                         <p>Albums and songs in Music Player</p>
@@ -68,6 +67,96 @@ Description: The main index for our music player
             </div><!-- end #data -->
         </div><!-- end #content -->
 
+<<<<<<< HEAD
+=======
+
+        <!--getting music to play-->
+        <script type="text/javascript">
+            
+            var songIndex = 0;
+            var albumIndex = 0;
+            var trackIndex = 0;
+            var song; 
+            var music;
+            var playing;
+        
+            $(document).ready(function() {
+                $.getJSON(
+                    "data/data.json",
+                    function(data) {
+
+                       // music = data.tracks;
+                        //playing = music;
+                        //console.log("playing");
+                        //albums = data.albums;
+
+                        //set first song
+                        $("#playlist").attr("src", data.albums[].tracks[].audio[songIndex]);
+                        console.log("song is playing");
+                        
+                        //audio object
+                        song = document.getElementById("playlist");
+                        
+                        //ended event
+                        song.addEventListener("ended", function() {
+                            //next song index
+                            songIndex++;
+                            //song index is less than all songs
+                            if(songIndex < data.albums[].tracks[].audio.length) {
+                                //set song
+                                $("#playlist").attr("src", data.albums[].tracks[].audio[songIndex]);
+                                //play song
+                                song.play();
+
+                                //display artist info
+                                $("artist").html(data.albums.artist);
+
+                                //display song name
+                                $("song").html(data.albums.tracks);
+
+                            } else {
+                                //all songs finished playing
+                            }
+                        });
+                        //play first sound
+                        song.play();
+                    }
+                );
+
+                //when play button is clicked, play audio 
+               $("#play").click(function(){
+
+                    if(playing == 0){//if nothing is playing
+                        index = 0;//restart playlist
+
+                        for(var i=0; i < currentSong.length; i++){
+                            console.log(playing[i]);
+                        }
+
+                        playing = 1;// if something is playing
+
+                        //display pause button
+                    }
+
+                    });
+
+               //when pause button is pressed
+               $("#stop").click(function(){//we want to pause, not stop
+                //check if something is playing
+                //pause the playing song
+                //display play button
+
+                    });
+
+               //duration display 
+
+            });
+        </script> <!--end music player script-->
+
+
+
+
+>>>>>>> audio-branch
         <script id="homePage" type="text/x-handlebars-template">
             Its {{name}}! Just listening to music and stuff.
         </script>       

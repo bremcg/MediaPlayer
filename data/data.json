@@ -5,18 +5,30 @@
                     "id": 1,
                     "artist": "Air",
                     "title": "Moon Safari",
+<<<<<<< HEAD
                     "bio": "This is a bio.",
+=======
+                    "bio": "A music duo from France.",
+>>>>>>> audio-branch
                     "date": "1998",
                     "genre": "Dance",
                     "image": "img/Air.png",
                     "tracks": [
                         {
                             "name": "Le LeVoyage de Penelope",
+<<<<<<< HEAD
                             "audio": "playlist/LeVoyageDePenelope.m4a"
                         },
                         {
                             "name": "La Femme de Argent",
                             "audio": "playlist/Lafemmedargent.m4a"
+=======
+                            "audio": "playlist/LeVoyageDePenelope.mp3"
+                        },
+                        {
+                            "name": "La Femme de Argent",
+                            "audio": "playlist/Lafemmedargent.mp3"
+>>>>>>> audio-branch
                         }
                     ]
                 },
@@ -24,13 +36,18 @@
                     "id": 2,
                     "artist": "The Beatles",
                     "title": "Love",
+<<<<<<< HEAD
                     "bio": "This is a bio.",
+=======
+                    "bio": "English rock band during the 1960s. Their music ultimately led to a sociacultural revolution.",
+>>>>>>> audio-branch
                     "date": "1975",
                     "genre": "Rock",
                     "image": "img/Love.png",
                     "tracks": [
                         {
                             "name": "Glass Onion",
+<<<<<<< HEAD
                             "audio": "playlist/GlassOnion.m4a"
                         },
                         {
@@ -44,6 +61,21 @@
                         {
                             "name": "Drive My Car",
                             "audio": "playlist/DriveMyCar.m4a"
+=======
+                            "audio": "playlist/GlassOnion.mp3"
+                        },
+                        {
+                            "name": "I am the Walrus",
+                            "audio": "playlist/IAmTheWalrus.mp3"
+                        },
+                        {
+                            "name": "I Want to Hold Your Hand",
+                            "audio": "playlist/IWantToHoldYourHand.mp3"
+                        },
+                        {
+                            "name": "Drive My Car",
+                            "audio": "playlist/DriveMyCar.mp3"
+>>>>>>> audio-branch
                         },
                         {
                             "name": "Benefit of Mr. Kite/She's So Heavy",
@@ -51,6 +83,7 @@
                         },
                         {
                             "name": "Help",
+<<<<<<< HEAD
                             "audio": "playlist/Help.m4a"
                         },
                         {
@@ -80,6 +113,37 @@
                         {
                             "name": "All You Need Is Love",
                             "audio": "playlist/AllYouNeedIsLove.m4a"
+=======
+                            "audio": "playlist/Help.mp3"
+                        },
+                        {
+                            "name": "Blackbird/Yesterday",
+                            "audio": "playlist/Blackbird_Yesterday.mp3"
+                        },
+                        {
+                            "name": "Strawberry Fields Forever",
+                            "audio": "playlist/StrawberryFieldsForever.mp3"
+                        },
+                        {
+                            "name": "Lucy in the Sky With Diamonds",
+                            "audio": "playlist/LucyInTheSkyWithDiamons.mp3"
+                        },
+                        {
+                            "name": "Octopus's Garden",
+                            "audio": "playlist/OctopusGarden.mp3"
+                        },
+                        {
+                            "name": "Here Comes the Sun",
+                            "audio": "playlist/HereComesTheSun.mp3"
+                        },
+                        {
+                            "name": "Hey Jude",
+                            "audio": "playlist/HeyJude.mp3"
+                        },
+                        {
+                            "name": "All You Need Is Love",
+                            "audio": "playlist/AllYouNeedIsLove.mp3"
+>>>>>>> audio-branch
                         }
                     ]
                 },
@@ -87,7 +151,11 @@
                     "id": 3,
                     "artist": "Led Zeppelin",
                     "title": "Led Zeppelin II",
+<<<<<<< HEAD
                     "bio": "This is a bio.",
+=======
+                    "bio": "Led Zeppelin formed in 1968. They are probably one of the most influental rock bands in history.",
+>>>>>>> audio-branch
                     "date": "1979",
                     "genre": "Blues",
                     "image": "img/LedZeppelin2.png",
@@ -134,13 +202,18 @@
                     "id": 4,
                     "artist": "Portugal The Man",
                     "title": "The Satanic Satanist",
+<<<<<<< HEAD
                     "bio": "This is a bio.",
+=======
+                    "bio": "A pyschedelic rock / pop band from Wasilla, Alaska.",
+>>>>>>> audio-branch
                     "date": "2009",
                     "genre": "Alternative",
                     "image": "img/TheSantanicSantanist.png",
                     "tracks": [
                         {
                             "name": "Lovers In Love",
+<<<<<<< HEAD
                             "audio": "playlist/LoversInLove.m4a"
                         },
                         {
@@ -154,6 +227,21 @@
                         {
                             "name": "People Say",
                             "audio": "playlist/PeopleSay.m4a"
+=======
+                            "audio": "playlist/LoversInLove.mp3"
+                        },
+                        {
+                            "name": "Work All Day",
+                            "audio": "playlist/WorkAllDay.mp3"
+                        },
+                        {
+                            "name": "The Sun",
+                            "audio": "playlist/TheSun.mp3"
+                        },
+                        {
+                            "name": "People Say",
+                            "audio": "playlist/PeopleSay.mp3"
+>>>>>>> audio-branch
                         }
 
                     ]
@@ -162,7 +250,11 @@
                     "id": 5,
                     "artist": "Tame Impala",
                     "title": "Tame Impala",
+<<<<<<< HEAD
                     "bio": "This is a bio.",
+=======
+                    "bio": "Pyschedelic rock band from Austraila.",
+>>>>>>> audio-branch
                     "date": "2010",
                     "genre": "Rock",
                     "image": "img/TameImpala.png",
@@ -180,9 +272,16 @@
                 }
 
             ],
+<<<<<<< HEAD
     "genres": ["Alternative", "Blues", "Dance", "Rock"],
     "albumTitle": ["Led Zeppelin II", "Love", "Moon Safari", "Tame Impala", "The Satanic Satanist"],
     "artistName": ["Air", "Led Zeppelin", "Portugal The Man", "Tame Impala", "The Beatles"]
 
+=======
+
+    "genres": ["Alternative", "Blues", "Dance", "Rock"],
+    "albumTitle": ["Led Zeppelin II", "Love", "Moon Safari", "Tame Impala", "The Satanic Satanist"],
+    "artistName": ["Air", "Led Zeppelin", "Portugal The Man", "Tame Impala", "The Beatles"]
+>>>>>>> audio-branch
 
 }
