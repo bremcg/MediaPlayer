@@ -18,7 +18,7 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-        <audio id="playlist" preload="" tabindex="0" autoplay="" loop=""></audio>
+        <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
 
         <div id="banner">
 
@@ -85,9 +85,10 @@ Description: The main index for our music player
                        // music = data.tracks;
                         //playing = music;
                         //console.log("playing");
+                        //albums = data.albums;
 
-                        //set first sound
-                        $("#playlist").attr("src", data.tracks[songIndex]);
+                        //set first song
+                        $("#playlist").attr("src", data.albums[0].tracks[0].audio[songIndex]);
                         console.log("song is playing");
                         
                         //audio object
@@ -99,29 +100,55 @@ Description: The main index for our music player
                             songIndex++;
                             //song index is less than all songs
                             if(songIndex < data.tracks.length) {
-                                //set sound
-                                $("#playlist").attr("src", data.tracks[songIndex]);
-                                //play sound
+                                //set song
+                                $("#playlist").attr("src", data.albums[0].tracks[0].audio[songIndex]);
+                                //play song
                                 song.play();
 
                                 //display artist info
-                                $("artist").html(data.albums.artist[artistIndex]);
+                                $("artist").html(data.albums.artist);
 
                                 //display song name
-                                $("song").html(data.albums.tracks.name[tracksIndex]);
+                                $("song").html(data.albums.tracks.name);
 
                             } else {
-                                //all sounds finished playing
+                                //all songs finished playing
                             }
                         });
                         //play first sound
                         song.play();
                     }
                 );
+
+                //when play button is clicked, play audio 
+               $("#play").click(function(){
+
+                    if(playing == 0){//if nothing is playing
+                        index = 0;//restart playlist
+
+                        for(var i=0; i < currentSong.length; i++){
+                            console.log(playing[i]);
+                        }
+
+                        playing = 1;// if something is playing
+
+                        //display pause button
+                    }
+
+                    });
+
+               //when pause button is pressed
+               $("#stop").click(function(){//we want to pause, not stop
+                //check if something is playing
+                //pause the playing song
+                //display play button
+
+                    });
+
+               //duration display 
+
             });
         </script> <!--end music player script-->
-
-
 
 
 
@@ -257,9 +284,9 @@ $(document).ready(function() {
     hashVal = hashVal.replace("#", "");
     console.log(hashVal);
 
-    if (window.location.hash == "") {
+    if (window.location.hash === "") {
         // hashVal = "fragments/index.html";
-        hashVal = "fragments/index.html";
+        hashVal = "fragments/genres.html";
     }
 
     $.get(
@@ -359,17 +386,17 @@ $(document).ready(function() {
     var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());//genre links
     var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());//artist info in browse div
     var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());//albums links
-
+    var artistLinkTemplate = Handlebars.compile($("#artistLinks").html());
 
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-        //image = data.albums.image;
+        
         $("#content").append(albumLinkTemplate(data));
         genreDiv.html(genreLinkTemplate(data.genres));//genre links
         albumsDiv.html(albumLinkTemplate(data.albums));//albums links
         artistDiv.html(artistLinkTemplate(data.artist));//artist links
-    })
+    });
 
 
     //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
@@ -390,23 +417,13 @@ $(document).ready(function() {
     //})
 
 
-
-    // $("#genres").on("click", ".genreLink", function() {
-    //   var genreToFind = $(this).html();
-    // var results = {};
-
-    //results.albums = _.where(albums, {genre: genreToFind});
-
-    //browseDiv.html(albumLinkTemplate(results));
-    //})
-
     $("#btnSearch").click(function() {
         //get the search term
         var searchTerm = $("#txtSearch").val();
         //object to store any results
         var results = {
             albums: []
-        }
+        };
 
         //loop through all of our albums
         results.albums = _.filter(albums, function(item) {
@@ -414,25 +431,14 @@ $(document).ready(function() {
             var titleSplit = item.title.split(" ");
             return _.find(titleSplit, function(titleWord) {
                 return titleWord.toUpperCase() == searchTerm.toUpperCase();
-            })
-        })
-        /*for(var i = 0; i < books.length; i++) {
-         //split the book's name into individual words
-         var titleSplit = books[i].title.split(" ");
-         
-         //loop through those words
-         for(var y = 0; y < titleSplit.length; y++) {
-         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
-         results.books.push(books[i]);
-         break;
-         }
-         }
-         }*/
+            });
+        });
+
 
         browseDiv.html(albumLinkTemplate(results));
 
-    })
-})
+    });
+});
         </script>        
     </body>
 </html>

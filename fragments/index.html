@@ -11,6 +11,7 @@
         <script type="text/javascript" src="../js/underscore-min.js"></script>
     </head>
     <body>
+
             
 <!-- This page will display then genres for user to select -->
                     <!--This will display either Genre Type, Album Name, or Artist Name-->
@@ -25,21 +26,38 @@
                     <!--clear floats and whatever-->
                     <div style="clear:both; width:100%" ></div>
 
-                    <!--Search-->
+                    <!--Search--> 
                     <div id="search">
-                        <div>Search for</div>
-                        <div>Title: <input id="txtSearch" /></div>
-                        <div><input id="btnSearch" type="button" value="search" /></div>
-                    </div>
+                        Search for Title: <input id="txtSearch" />
+                        <input class="button" id="btnSearch" type="button" value="Find It!" />
+                    </div>      
 
-        
-        
+        <!-- This page will display then genres for user to select -->
+        <!--This will display either Genre Type, Album Name, or Artist Name-->
+        <!-- start of an experiment to slide the option to the left-->
+        <div id="contentSubOne">
+            <div id="genres"></div>
+            <div id="browse"></div> <!-- this div will display to the right with more info -->
+        </div>
+
+        <div id="info"></div>
+
+        <!--clear floats and whatever-->
+        <div style="clear:both; width:100%" ></div>
+
+        <!--Search-->
+        <div id="search">
+            <div>Search for title: <input id="txtSearch" /></div>
+            <div><input id="btnSearch" type="button" value="search" /></div>
+        </div>
+
         <!--template to display album title, artist name, and tracks -->
         <script id="tracksLinks" type="text/x-handlebars-template">
 
             <ul class="tracks_list">
             {{#each albums}}
             <li class="trackLink" data-id="{{this.id}}">
+            <li class="trackLink" data-id="{{this.artist}}">
             {{#each this.tracks}}
             <li class="trackLink">{{this.name}}</li>
             {{/each}}
@@ -47,7 +65,7 @@
             {{/each}}	
             </ul>    
         </script> 
-  
+
 
         <!-- genre links -->
         <script id="genreLinks" type="text/x-handlebars-template">
@@ -57,7 +75,7 @@
             {{/each}}
             </ul>
         </script>        
-        
+
         <script>
 var albums;
 
@@ -72,7 +90,7 @@ $(document).ready(function() {
 
 
     //templates
-   // var hompageTemplate = Handlebars.compile($("#homePage").html());
+    // var hompageTemplate = Handlebars.compile($("#homePage").html());
     var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());
     var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
 
@@ -80,7 +98,7 @@ $(document).ready(function() {
 
     $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-        
+
         //template of genreLinks displayed..
         genreDiv.html(genreLinkTemplate(data.genres));
 
@@ -103,7 +121,7 @@ $(document).ready(function() {
         //object to store any results
         var results = {
             albums: []
-        }
+        };
 
         //loop through all of our albums
         results.albums = _.filter(albums, function(item) {
@@ -111,27 +129,27 @@ $(document).ready(function() {
             var titleSplit = item.title.split(" ");
             return _.find(titleSplit, function(titleWord) {
                 return titleWord.toUpperCase() == searchTerm.toUpperCase();
-            })
-        })
+            });
+        });
         /*for(var i = 0; i < books.length; i++) {
-//split the book's name into individual words
-var titleSplit = books[i].title.split(" ");
-//loop through those words
-for(var y = 0; y < titleSplit.length; y++) {
-if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
-results.books.push(books[i]);
-break;
-}
-}
-}*/
+         //split the book's name into individual words
+         var titleSplit = books[i].title.split(" ");
+         //loop through those words
+         for(var y = 0; y < titleSplit.length; y++) {
+         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
+         results.books.push(books[i]);
+         break;
+         }
+         }
+         }*/
 
         browseDiv.html(albumLinkTemplate(results));//search results
 
-    })
-})
+    });
+});
         </script>
-        
-        
-        
+
+
+
     </body>
 </html>
