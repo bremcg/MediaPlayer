@@ -35,21 +35,9 @@
             Its {{name}}! Just listening to music and stuff.
         </script>   
 
-<<<<<<< HEAD
-
-
-
-
-
+    
         <script>
             var albums;
-
-
-            $(document).ready(function() {
-=======
-        <script>
-            var albums;
-
 
             $(document).ready(function() {
                 //below starts getting information from JSON file                    
@@ -66,31 +54,27 @@
                 var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
                 //below is compile for albumsTitle array to display on albums page
                 var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
->>>>>>> audio-branch
 
-
-<<<<<<< HEAD
                 //cached DOM references
                 var infoDiv = $("#info");
                 var browseDiv = $("#browse");
                 var albumsDiv = $("#albums");
-=======
->>>>>>> audio-branch
+
 
                 $.getJSON('data/data.json', function(data) {
                     albums = data.albums;
 
-<<<<<<< HEAD
+
                 //templates
                 //var hompageTemplate = Handlebars.compile($("#homePage").html());
                 var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//this displays info to browse div
                 var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());
                 //below is compile for albumsTitle array to display on albums page
                 var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());
-=======
+
                     //this display the albums list from object albumTitle in JSON file.
                     albumsDiv.html(albumsLinkTemplate(data.albumTitle));//this worked!!!
->>>>>>> audio-branch
+
 
                 });
 
@@ -100,7 +84,7 @@
                     var albumToFind = $(this).html();
                     var results = {};
 
-<<<<<<< HEAD
+
                 $.getJSON('data/data.json', function(data) {
                     albums = data.albums;
 
@@ -114,21 +98,21 @@
                 $("#albums").on("click", ".albumsLink", function() {
                     var albumToFind = $(this).html();
                     var results = {};
-=======
+
                     results.albums = _.where(albums, {title: albumToFind});
 
                     browseDiv.html(albumLinkTemplate(results));
                 });
 
 
->>>>>>> audio-branch
+
 
                     results.albums = _.where(albums, {title: albumToFind});
 
-<<<<<<< HEAD
+
                     browseDiv.html(albumLinkTemplate(results));
                 });
-=======
+
                 $("#btnSearch").click(function() {
                     //get the search term
                     var searchTerm = $("#txtSearch").val();
@@ -136,7 +120,6 @@
                     var results = {
                         albums: []
                     };
->>>>>>> audio-branch
 
                     //loop through all of our albums
                     results.albums = _.filter(albums, function(item) {
@@ -147,7 +130,7 @@
                         });
                     });
 
-<<<<<<< HEAD
+
 
 
                 $("#btnSearch").click(function() {
@@ -171,13 +154,12 @@
 
                 });
             });
-=======
+
                     browseDiv.html(albumLinkTemplate(results));
 
                 });
             });
 
->>>>>>> audio-branch
         </script>          
 
 
